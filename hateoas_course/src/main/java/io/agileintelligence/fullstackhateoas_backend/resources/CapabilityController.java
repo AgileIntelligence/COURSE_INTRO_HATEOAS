@@ -4,6 +4,8 @@ import io.agileintelligence.fullstackhateoas_backend.domain.Capability;
 import io.agileintelligence.fullstackhateoas_backend.services.CapabilityService;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -77,5 +79,12 @@ public class CapabilityController {
                 );
     }
 
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCapability(@PathVariable Long id){
+        capabilityService.deleteCapability(id);
+
+        return new ResponseEntity<String>("Capability Deleted", HttpStatus.OK);
+    }
 
 }
