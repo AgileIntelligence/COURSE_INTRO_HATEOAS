@@ -27,4 +27,9 @@ public class CapabilityService {
 
     }
 
+    public Capability saveCapability(Capability capability){
+        //
+        return capabilityRepository.save(capability);
+    }
+
 }
