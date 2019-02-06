@@ -4,8 +4,10 @@ import io.agileintelligence.fullstackhateoas_backend.domain.Capability;
 import io.agileintelligence.fullstackhateoas_backend.services.CapabilityService;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,7 +52,9 @@ public class CapabilityController {
     }
 
     @PostMapping
-    public Object createCapability(@RequestBody Capability capability){
+    public Object createCapability(@Valid @RequestBody Capability capability, BindingResult result){
+
+        if(result.hasErrors()) return capabilityService.errorMap(result);
 
         Capability newCapability = capabilityService.saveCapability(capability);
 
