@@ -59,9 +59,23 @@ public class CapabilityController {
         Capability newCapability = capabilityService.saveCapability(capability);
 
         return new Resource<>(newCapability,
-                linkTo(methodOn(CapabilityController.class).getCapability(capability.getId())).withRel("getThisCapability"),
+                linkTo(methodOn(CapabilityController.class).getCapability(newCapability.getId())).withRel("getThisCapability"),
                 linkTo(methodOn(CapabilityController.class).getAllCapabilities()).withRel("getAllCapabilities")
                 );
 
     }
+
+    @PutMapping("/{id}")
+    public Object updateCapability(@PathVariable Long id, @Valid @RequestBody Capability capability, BindingResult result){
+        if(result.hasErrors()) return capabilityService.errorMap(result);
+
+        Capability capabilityToUpdate = capabilityService.updateCapability(id,capability);
+
+        return new Resource<>(capabilityToUpdate,
+                linkTo(methodOn(CapabilityController.class).getCapability(capabilityToUpdate.getId())).withRel("getThisCapability"),
+                linkTo(methodOn(CapabilityController.class).getAllCapabilities()).withRel("getAllCapabilities")
+                );
+    }
+
+
 }
