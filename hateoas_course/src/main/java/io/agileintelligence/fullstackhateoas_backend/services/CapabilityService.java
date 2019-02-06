@@ -19,6 +19,7 @@ public class CapabilityService {
     public List<Capability> getAllCapabilities(){
         return capabilityRepository.findAll();
     }
+
     public Capability findCapById(Long id){
 
         return capabilityRepository.findById(id).
