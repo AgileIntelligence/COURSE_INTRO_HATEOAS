@@ -1,3 +1,5 @@
+import { GET_CAPABILITIES } from "../actions/ActionTypes";
+
 const initialState = {
   capabilities: [],
   capability: {},
@@ -6,8 +8,12 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    //GET CAPABILITIES
-    //OTHER REDUCER ACTIONS.
+    case GET_CAPABILITIES:
+      return {
+        ...state,
+        capabilities: action.payload
+      };
+
     default:
       return state;
   }

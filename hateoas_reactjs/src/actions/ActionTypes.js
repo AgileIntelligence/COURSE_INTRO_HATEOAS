@@ -1,0 +1,1 @@
+export const GET_CAPABILITIES = "GET_CAPABILITIES";
