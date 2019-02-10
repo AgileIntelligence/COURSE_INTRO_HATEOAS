@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteCapability } from "../../actions/CapabilityActions";
+import UpdateIcon from "./UpdateIcon";
 
 export class Capability extends Component {
   deleteCapability = (id, deleteLink) => {
@@ -21,7 +22,7 @@ export class Capability extends Component {
       <div className="card card-body border-primary mb-3">
         <h4 className="text-primary">
           {techStack} ...{_links.getThisCapability.href}
-          <i className="fas fa-user-edit ml-2" style={{ color: "blue" }} />
+          <UpdateIcon />
           <i
             className="fas fa-user-times ml-2"
             style={{ color: "red" }}
