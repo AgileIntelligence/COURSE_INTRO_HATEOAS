@@ -49,6 +49,11 @@ export class Capability extends Component {
   }
 }
 
+Capability.propTypes = {
+  capability: PropTypes.object.isRequired,
+  deleteCapability: PropTypes.func.isRequired
+};
+
 export default connect(
   null,
   { deleteCapability }
