@@ -15,7 +15,8 @@ export default function(state = initialState, action) {
     case GET_CAPABILITIES:
       return {
         ...state,
-        capabilities: action.payload
+        capabilities: action.payload,
+        links: action.links
       };
 
     case DELETE_CAPABILITY:
