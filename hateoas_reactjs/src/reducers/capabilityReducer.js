@@ -1,4 +1,4 @@
-import { GET_CAPABILITIES } from "../actions/ActionTypes";
+import { GET_CAPABILITIES, DELETE_CAPABILITY } from "../actions/ActionTypes";
 
 const initialState = {
   capabilities: [],
@@ -12,6 +12,14 @@ export default function(state = initialState, action) {
       return {
         ...state,
         capabilities: action.payload
+      };
+
+    case DELETE_CAPABILITY:
+      return {
+        ...state,
+        capabilities: state.capabilities.filter(
+          capability => capability.id !== action.payload
+        )
       };
 
     default:
