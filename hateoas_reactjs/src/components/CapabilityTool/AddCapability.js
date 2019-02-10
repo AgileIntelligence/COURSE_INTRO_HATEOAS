@@ -1,23 +1,50 @@
 import React, { Component } from "react";
 import classnames from "classnames";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { addCapability } from "../../actions/CapabilityActions";
 
 export class AddCapability extends Component {
+  state = {
+    techStack: "",
+    numOfDevelopers: "",
+    numOfAvailableDevelopers: "",
+    errors: {}
+  };
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    const { techStack, numOfDevelopers, numOfAvailableDevelopers } = this.state;
+    const newCapability = {
+      techStack,
+      numOfDevelopers,
+      numOfAvailableDevelopers
+    };
+
+    this.props.addCapability(newCapability, this.props.closeModal);
+  };
+
   render() {
     const errors = {};
     return (
       <div className="card mb-3">
         <div className="card-header bg-primary text-light">Add Capability</div>
         <div className="card-body">
-          <form>
+          <form onSubmit={this.onSubmit}>
             <div className="form-group">
               <label htmlFor="name">Technology Stack</label>
               <input
                 type="text"
                 name="techStack"
-                value=""
+                value={this.state.techStack}
                 className={classnames("form-control form-control-lg", {
                   "is-invalid": errors.techStack
                 })}
+                onChange={this.onChange}
               />
               {errors.techStack && (
                 <div className="invalid-feedback">{errors.techStack}</div>
@@ -28,22 +55,19 @@ export class AddCapability extends Component {
               <input
                 type="number"
                 name="numOfDevelopers"
-                value=""
-                className={classnames("form-control form-control-lg", {
-                  "is-invalid": errors.numOfDevelopers
-                })}
+                value={this.state.numOfDevelopers}
+                className="form-control form-control-lg"
+                onChange={this.onChange}
               />
-              {errors.email && (
-                <div className="invalid-feedback">{errors.email}</div>
-              )}
             </div>
             <div className="form-group">
               <label htmlFor="name">Available developers for hire</label>
               <input
                 type="number"
                 name="numOfAvailableDevelopers"
-                value=""
+                value={this.state.numOfAvailableDevelopers}
                 className="form-control form-control-lg"
+                onChange={this.onChange}
               />
             </div>
             <input
@@ -58,4 +82,11 @@ export class AddCapability extends Component {
   }
 }
 
-export default AddCapability;
+AddCapability.propTypes = {
+  addCapability: PropTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  { addCapability }
+)(AddCapability);

@@ -41,7 +41,7 @@ export class AddButton extends Component {
               <i className="far fa-times-circle mr-1 " />
               Close Modal
             </button>
-            <AddCapability />
+            <AddCapability closeModal={this.closeModal} />
           </Modal>
         </React.Fragment>
       </div>
