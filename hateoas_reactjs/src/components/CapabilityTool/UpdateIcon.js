@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Modal from "react-modal";
 import UpdateCapability from "./UpdateCapability";
+import { closeModalClearState } from "../../actions/CapabilityActions";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 const customStyles = {
   content: {
@@ -18,6 +21,7 @@ class UpdateIcon extends Component {
   };
 
   closeModal = () => {
+    this.props.closeModalClearState();
     this.setState({ modalIsOpen: false });
   };
 
@@ -42,11 +46,18 @@ class UpdateIcon extends Component {
             <i className="far fa-times-circle mr-1 " />
             Close Modal
           </button>
-          <UpdateCapability />
+          <UpdateCapability closeModal={this.closeModal} id={this.props.id} />
         </Modal>
       </React.Fragment>
     );
   }
 }
 
-export default UpdateIcon;
+UpdateIcon.propTypes = {
+  closeModalClearState: PropTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  { closeModalClearState }
+)(UpdateIcon);

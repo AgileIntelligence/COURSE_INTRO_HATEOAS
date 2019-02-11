@@ -22,7 +22,7 @@ export class Capability extends Component {
       <div className="card card-body border-primary mb-3">
         <h4 className="text-primary">
           {techStack} ...{_links.getThisCapability.href}
-          <UpdateIcon />
+          <UpdateIcon id={id} />
           <i
             className="fas fa-user-times ml-2"
             style={{ color: "red" }}
