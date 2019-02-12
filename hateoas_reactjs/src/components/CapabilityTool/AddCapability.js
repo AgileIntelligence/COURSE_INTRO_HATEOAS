@@ -47,7 +47,7 @@ export class AddCapability extends Component {
         <div className="card-body">
           <form onSubmit={this.onSubmit}>
             <div className="form-group">
-              <label htmlFor="name">Technology Stack</label>
+              <label htmlFor="techStack">Technology Stack</label>
               <input
                 type="text"
                 name="techStack"
@@ -62,7 +62,9 @@ export class AddCapability extends Component {
               )}
             </div>
             <div className="form-group">
-              <label htmlFor="email">Total Developers in Capability</label>
+              <label htmlFor="numOfDevelopers">
+                Total Developers in Capability
+              </label>
               <input
                 type="number"
                 name="numOfDevelopers"
@@ -72,7 +74,9 @@ export class AddCapability extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="name">Available developers for hire</label>
+              <label htmlFor="numOfAvailableDevelopers">
+                Available developers for hire
+              </label>
               <input
                 type="number"
                 name="numOfAvailableDevelopers"

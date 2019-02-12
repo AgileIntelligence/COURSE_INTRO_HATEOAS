@@ -3,7 +3,8 @@ import {
   DELETE_CAPABILITY,
   ADD_CAPABILITY,
   GET_CAPABILITY,
-  CLEAR_CAPABILITY_CLOSE_MODAL
+  CLEAR_CAPABILITY_CLOSE_MODAL,
+  UPDATE_CAPABILITY
 } from "../actions/ActionTypes";
 
 const initialState = {
@@ -47,6 +48,16 @@ export default function(state = initialState, action) {
       return {
         ...state,
         capability: action.payload
+      };
+
+    case UPDATE_CAPABILITY:
+      return {
+        ...state,
+        capabilities: state.capabilities.map(capability =>
+          capability.id === action.payload.id
+            ? (capability = action.payload)
+            : capability
+        )
       };
 
     default:

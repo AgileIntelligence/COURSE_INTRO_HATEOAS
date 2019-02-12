@@ -1,5 +1,6 @@
 package io.agileintelligence.fullstackhateoas_backend.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
