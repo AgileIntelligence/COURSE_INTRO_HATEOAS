@@ -9,21 +9,36 @@ import {
   UPDATE_CAPABILITY
 } from "./ActionTypes";
 
+const clearErrors = () => ({
+  type: GET_ERRORS,
+  payload: {}
+});
+
+const instance = axios.create({
+  baseURL: "http://localhost:8080/dashboard"
+});
+
+// const HerokuInstance = axios.create({
+//   baseURL: ""
+// });
+
 export const getAllCapabilities = () => async dispatch => {
-  try {
-    const res = await axios.get("http://localhost:8080/dashboard");
-    dispatch({
-      type: GET_CAPABILITIES,
-      payload: res.data._embedded.capabilityList,
-      links: res.data._links
+  await instance
+    .get()
+    .then(function(res) {
+      dispatch({
+        type: GET_CAPABILITIES,
+        payload: res.data._embedded.capabilityList,
+        links: res.data._links
+      });
+    })
+    .catch(function(error) {
+      dispatch({
+        type: GET_CAPABILITIES,
+        payload: [],
+        links: {}
+      });
     });
-  } catch (error) {
-    dispatch({
-      type: GET_CAPABILITIES,
-      payload: [],
-      links: {}
-    });
-  }
 };
 
 export const deleteCapability = (id, deleteLink) => async dispatch => {
@@ -46,10 +61,7 @@ export const addCapability = (
       type: ADD_CAPABILITY,
       payload: res.data
     });
-    dispatch({
-      type: GET_ERRORS,
-      payload: {}
-    });
+    dispatch(clearErrors());
   } catch (error) {
     dispatch({
       type: GET_ERRORS,
@@ -65,7 +77,7 @@ export const getCapabilityById = id => async dispatch => {
   });
 };
 
-export const closeModalClearState = () => async dispatch => {
+export const closeModalClearState = () => dispatch => {
   dispatch({
     type: CLEAR_CAPABILITY_CLOSE_MODAL,
     payload: {
@@ -74,8 +86,8 @@ export const closeModalClearState = () => async dispatch => {
       numOfAvailableDevelopers: 0
     }
   });
+  dispatch(clearErrors());
 };
-
 export const updateCapability = (
   capability,
   closeModal,
@@ -88,10 +100,7 @@ export const updateCapability = (
       type: UPDATE_CAPABILITY,
       payload: res.data
     });
-    dispatch({
-      type: GET_ERRORS,
-      payload: {}
-    });
+    dispatch(clearErrors());
   } catch (error) {
     dispatch({
       type: GET_ERRORS,
